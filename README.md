@@ -1,30 +1,29 @@
-# pico-panic
+# PICO PANIC
 
-PICO PANIC — English microgame arcade.
+An original, mobile-friendly learning microgame arcade: **8 subjects, 23 mechanics, 352 question records**. This branch is a candidate expansion; it has not been deployed.
 
-An original browser game with eight English-learning mechanics and 64 questions, a timed arcade round, practice, and a retry mode for missed questions.
+English, real national flags, Japanese history, geography, mathematics, Japanese language, kanji and science. Pick a subject and difficulty, or mix everything. The 60-second challenge leads into a three-stage boss with three lives. Practice and saved missed-question retry are untimed.
 
-## Run locally
+## Run
 
-Serve this repository with any static web server, for example:
+No build or runtime dependency is required. Serve the repository root with any static server, or run `npm start`, then open `http://127.0.0.1:4178/`. All assets are local and relative; the app also supports the `/pico-panic/` GitHub Pages subpath.
 
-```sh
-python3 -m http.server 8000
-```
+## Verify
 
-Then open http://localhost:8000/. No build step or package installation is required. The entry point is `index.html`.
+Run `npm ci` followed by `npm test`. The tests use a separate headless Edge process on Windows. Set `PICO_BROWSER` to an installed Chromium executable on another system. Tests start their own loopback server on port 4181, solve every question through UI controls and exercise lifecycle, storage and responsive layouts. Results: `verification/results.json`. Screenshots: `verification/screenshots/` (not committed).
 
-## GitHub Pages
+## Accessibility, privacy and audio
 
-Publish the `main` branch from the repository root (`/`). All app asset references are relative, so the app supports the repository's GitHub Pages subpath. `.nojekyll` preserves the static files as-is.
+- Tap and native keyboard controls, visible focus, optional slow mode and reduced motion.
+- Full written questions; English speech is optional. No sound is required to answer.
+- Original Web Audio normal/boss music and five effect cues. Saved mute and volume; speech ducks music. Pause/background/page exit stop playback.
+- Existing `pico-panic-v1` preferences and scores are preserved. New course preferences and the persistent mistake notebook use a separate validated storage key.
+- No trackers, API keys, cloud saves, remote fonts or runtime asset requests.
 
-## Features and privacy
+See [EXPANSION.md](EXPANSION.md) for every mechanic, question counts, scope, source links, storage behavior and test details. History currently covers Japan from late Edo through early postwar Showa; science focuses on the planets. Question counts include repeated facts explored through different operations, not a complete school curriculum.
 
-- Robot directions, packing, word order, clocks, café quantities, conversations, spatial placement, and city switches
-- Three untimed introductory practice questions, slow mode, pause/resume, and review explanations
-- Keyboard controls for the robot and tap controls throughout
-- Optional English speech with the complete written prompt always visible
-- Preferences and high scores stored locally in the browser; no cloud synchronization
-- No runtime dependencies, trackers, external fonts, API keys, or external data requests
+## Assets
 
-Hero artwork was generated for this original app. Sound effects are synthesized. Speech and emoji availability depend on the browser and operating system.
+Hero artwork was generated for the original app. All music/effects in `audio.js` are originally composed oscillator synthesis, with no external samples. Twelve flag SVGs are redistributed from **flag-icons** under MIT; the original copyright and license are preserved in [assets/flags/LICENSE.txt](assets/flags/LICENSE.txt). The app links the flag source and authoritative factual sources in relevant review entries.
+
+Publishing is separate from this candidate. No `main` update, push or deployment has been performed.

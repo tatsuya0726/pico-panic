@@ -1,0 +1,13 @@
+'use strict';
+// Original procedurally composed music. No samples or third-party music.
+const PicoAudio=(()=>{
+ let ctx,master,music,fx,meter,timer,step=0,mode='normal',enabled=true,volume=.4,duck=false;
+ const active=new Set();
+ function init(){try{ctx??=new(window.AudioContext||window.webkitAudioContext)();if(!master){master=ctx.createGain();music=ctx.createGain();fx=ctx.createGain();meter=ctx.createAnalyser();meter.fftSize=2048;music.connect(master);fx.connect(master);master.connect(meter);meter.connect(ctx.destination);}if(ctx.state==='suspended')ctx.resume().catch(()=>{});apply();}catch{}}
+ function apply(){if(!ctx||!master)return;master.gain.setTargetAtTime(enabled?volume:0,ctx.currentTime,.025);music.gain.setTargetAtTime(duck?.12:.65,ctx.currentTime,.08);}
+ function note(freq,duration,amp,type='triangle',bus=music){if(!ctx||!bus||ctx.state!=='running'||!enabled||document.hidden)return;const o=ctx.createOscillator(),g=ctx.createGain(),t=ctx.currentTime;o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(amp,t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+duration);o.connect(g);g.connect(bus);active.add(o);o.onended=()=>{active.delete(o);o.disconnect();g.disconnect();};o.start(t);o.stop(t+duration+.02);}
+ function stop(){clearInterval(timer);timer=null;for(const o of active)try{o.stop()}catch{}active.clear();}
+ function play(next='normal'){if(timer&&mode===next)return;stop();mode=next;step=0;if(!enabled||document.hidden)return;init();const melody=next==='boss'?[0,3,7,10,7,3,12,10,0,3,8,10,8,7,3,7]:[0,4,7,12,7,4,2,7,0,4,9,12,9,7,4,2];const pulse=()=>{if(document.hidden){stop();return;}const base=next==='boss'?196:220;note(base*2**(melody[step%16]/12),.18,.055,next==='boss'?'square':'triangle');if(step%4===0)note(base/2*(step%16<8?1:4/3),.42,.1,'sine');if(step%2===1)note(70,.045,.025,'triangle',fx);step++;};pulse();timer=setInterval(pulse,next==='boss'?160:235);}
+ function effect(kind){init();const tones={tap:[440],correct:[523,659,784],wrong:[180,120],boss:[196,294,392],win:[523,659,784,1047]};(tones[kind]||tones.tap).forEach((f,j)=>note(f,.09+j*.045,.045,'triangle',fx));}
+ return {init,play,stop,effect,duck(v){duck=v;apply()},configure(on,v){enabled=on;volume=Math.max(0,Math.min(1,v));apply();if(!on)stop()},suspend(){stop();ctx?.suspend().catch(()=>{})},state(){const samples=new Float32Array(2048);meter?.getFloatTimeDomainData(samples);const peak=samples.reduce((m,v)=>Math.max(m,Math.abs(v)),0);return {mode,playing:!!timer,enabled,volume,duck,context:ctx?.state||'uninitialized',voices:active.size,peak}}};
+})();

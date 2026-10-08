@@ -1,0 +1,100 @@
+{
+  "started": "2026-10-08T02:24:13.048Z",
+  "checks": [
+    {
+      "name": "catalog",
+      "details": {
+        "english": 64,
+        "flags": 36,
+        "geography": 36,
+        "history": 24,
+        "kanji": 48,
+        "japanese": 24,
+        "math": 96,
+        "science": 24
+      }
+    },
+    {
+      "name": "all 352 questions solved through controls"
+    },
+    {
+      "name": "timeouts recorded for all 23 mechanics"
+    },
+    {
+      "name": "double-submit guard"
+    },
+    {
+      "name": "v1 migration and persistent retry graduation"
+    },
+    {
+      "name": "corrupt and hostile-shape storage fallback"
+    },
+    {
+      "name": "all nonempty subject/difficulty combinations and 3-stage boss stay in pool"
+    },
+    {
+      "name": "real Web Audio waveform nonzero and below clipping",
+      "details": 0.014420443214476109
+    },
+    {
+      "name": "gesture audio startup and pause/resume freeze"
+    },
+    {
+      "name": "boss BGM, ducking reset, mute stop"
+    },
+    {
+      "name": "background pauses game and audio"
+    },
+    {
+      "name": "browser Back returns to home and stops round"
+    },
+    {
+      "name": "92 mechanic viewport checks + 28 screenshots, no horizontal overflow"
+    },
+    {
+      "name": "encyclopedia demo and quit-to-home"
+    },
+    {
+      "name": "keyboard focus retained, Escape and modal Tab loop"
+    },
+    {
+      "name": "audio/speech unavailable and storage blocked still playable"
+    },
+    {
+      "name": "zero uncaught browser errors"
+    }
+  ],
+  "screenshots": [
+    "home-320x568.png",
+    "match-320x568.png",
+    "memory-320x568.png",
+    "trace-320x568.png",
+    "move-320x568.png",
+    "clock-320x568.png",
+    "keypad-320x568.png",
+    "home-390x844.png",
+    "match-390x844.png",
+    "memory-390x844.png",
+    "trace-390x844.png",
+    "move-390x844.png",
+    "clock-390x844.png",
+    "keypad-390x844.png",
+    "home-844x390.png",
+    "match-844x390.png",
+    "memory-844x390.png",
+    "trace-844x390.png",
+    "move-844x390.png",
+    "clock-844x390.png",
+    "keypad-844x390.png",
+    "home-1280x800.png",
+    "match-1280x800.png",
+    "memory-1280x800.png",
+    "trace-1280x800.png",
+    "move-1280x800.png",
+    "clock-1280x800.png",
+    "keypad-1280x800.png"
+  ],
+  "errors": [],
+  "finished": "2026-10-08T02:24:35.980Z",
+  "passed": true
+}

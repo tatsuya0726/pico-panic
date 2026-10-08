@@ -1,0 +1,25 @@
+{
+  "name": "pico-panic",
+  "version": "1.0.0",
+  "description": "PICO PANIC: eight-subject learning microgame arcade",
+  "scripts": {
+    "start": "node serve.cjs",
+    "test": "node tests/verify.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tatsuya0726/pico-panic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tatsuya0726/pico-panic/issues"
+  },
+  "homepage": "https://github.com/tatsuya0726/pico-panic#readme",
+  "devDependencies": {
+    "flag-icons": "^7.5.0",
+    "playwright": "^1.64.0"
+  },
+  "private": true
+}
